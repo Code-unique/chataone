@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #012169;
+  --primary-dark: #001a4d;
+  --primary-light: #1a3a7e;
+  --accent: #ff6b00;
+  --accent-dark: #e55f00;
+  --accent-light: #ff8642;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Calendar Styles */
+.calendar-day {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.calendar-day.past {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.calendar-day.today {
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.calendar-day.selected {
+  background-color: #012169;
+  color: white;
+  font-weight: 500;
+}
+
+.calendar-day:not(.empty):not(.past):hover {
+  background-color: #f3f4f6;
+}
+
+/* Animation for the confirmation check */
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.checkmark {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: checkmark 1s ease-in-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .calendar-day {
+    height: 2rem;
+    width: 2rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation for fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation for spin */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Chat Assistant Styles */
+.aone-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.aone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  color: white;
+  z-index: 10;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.aone-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.online-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aone-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.aone-message {
+  max-width: 75%;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.aone-message.bot {
+  align-self: flex-start;
+  border-radius: 0 1.5rem 1.5rem 1.5rem;
+  background-color: white;
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.aone-message.user {
+  align-self: flex-end;
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  background: linear-gradient(135deg, #012169, #1a3a7e);
+  color: white;
+  box-shadow: 0 4px 15px rgba(1, 33, 105, 0.15);
+}
+
+.typing-loader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aone-input-container {
+  display: flex;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-top: 1px solid #eee;
+  gap: 1rem;
+}
+
+.glow-on-focus:focus {
+  border-color: #012169 !important;
+  box-shadow: 0 0 0 3px rgba(1, 33, 105, 0.1) !important;
+}
+
+.aone-send-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+}
+
+.aone-form-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  margin: 1rem auto;
+  color: #111;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+.radio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .radio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.submitting {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.aone-cta-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.aone-cta-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(1, 33, 105, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .aone-message {
+    max-width: 85%;
+  }
+
+  .aone-form-container {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .aone-cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .aone-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .aone-chat-messages {
+    padding: 1rem;
+  }
+
+  .aone-message {
+    padding: 0.75rem 1rem;
+    max-width: 90%;
+  }
+
+  .aone-input-container {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .aone-message {
+    max-width: 70%;
+  }
+}
